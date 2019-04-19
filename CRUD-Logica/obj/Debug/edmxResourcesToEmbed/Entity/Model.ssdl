@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NorthwindModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="EstadoTareas">
+    <Key>
+      <PropertyRef Name="usaCodigo" />
+    </Key>
+    <Property Name="usaCodigo" Type="int" Nullable="false" />
+    <Property Name="usaDescripcion" Type="nchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="PosiblesClientes">
+    <Key>
+      <PropertyRef Name="Identificacion" />
+    </Key>
+    <Property Name="Identificacion" Type="bigint" Nullable="false" />
+    <Property Name="Primero_Nombre" Type="nchar" MaxLength="20" />
+    <Property Name="Segundo_Nombre" Type="nchar" MaxLength="20" />
+    <Property Name="Primero_Apellido" Type="nchar" MaxLength="20" />
+    <Property Name="Segundo_Apellido" Type="nchar" MaxLength="20" />
+    <Property Name="Telefono" Type="nchar" MaxLength="10" />
+    <Property Name="Email" Type="nchar" MaxLength="50" />
+    <Property Name="Dirreccion" Type="nchar" MaxLength="100" />
+    <Property Name="Empresa" Type="nchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="nchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Tarea">
+    <Key>
+      <PropertyRef Name="tareaCodigo" />
+    </Key>
+    <Property Name="tareaCodigo" Type="int" Nullable="false" />
+    <Property Name="tareaTitular" Type="varchar" MaxLength="1000" />
+    <Property Name="tareaAsunto" Type="varchar" MaxLength="1000" />
+    <Property Name="tareaFechaVencimiento" Type="varchar" MaxLength="1000" />
+    <Property Name="tareaContacto" Type="varchar" MaxLength="1000" />
+    <Property Name="tareaCuenta" Type="varchar" MaxLength="1000" />
+    <Property Name="estadoCodigo" Type="int" Nullable="false" />
+    <Property Name="prioridaCodigo" Type="int" Nullable="false" />
+    <Property Name="tareaEnviarMensaje" Type="char" MaxLength="1" />
+    <Property Name="tareaRepetir" Type="char" MaxLength="1" />
+    <Property Name="tareaDescripcion" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="User" Type="nchar" MaxLength="100" />
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="descripcion" Type="nchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="50" />
+    <Property Name="usaImagen" Type="varchar(max)" />
+  </EntityType>
+  <Association Name="FK_Tarea_EstadoTareas">
+    <End Role="EstadoTareas" Type="Self.EstadoTareas" Multiplicity="1" />
+    <End Role="Tarea" Type="Self.Tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoTareas">
+        <PropertyRef Name="usaCodigo" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="estadoCodigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tarea_Prioridad">
+    <End Role="Prioridad" Type="Self.Prioridad" Multiplicity="1" />
+    <End Role="Tarea" Type="Self.Tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prioridad">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="prioridaCodigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NorthwindModelStoreContainer">
+    <EntitySet Name="EstadoTareas" EntityType="Self.EstadoTareas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PosiblesClientes" EntityType="Self.PosiblesClientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Prioridad" EntityType="Self.Prioridad" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Tarea" EntityType="Self.Tarea" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Tarea_EstadoTareas" Association="Self.FK_Tarea_EstadoTareas">
+      <End Role="EstadoTareas" EntitySet="EstadoTareas" />
+      <End Role="Tarea" EntitySet="Tarea" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tarea_Prioridad" Association="Self.FK_Tarea_Prioridad">
+      <End Role="Prioridad" EntitySet="Prioridad" />
+      <End Role="Tarea" EntitySet="Tarea" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

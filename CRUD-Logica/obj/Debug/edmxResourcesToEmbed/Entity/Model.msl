@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NorthwindModelStoreContainer" CdmEntityContainer="NorthwindEntities">
+    <EntitySetMapping Name="EstadoTareas">
+      <EntityTypeMapping TypeName="NorthwindModel.EstadoTareas">
+        <MappingFragment StoreEntitySet="EstadoTareas">
+          <ScalarProperty Name="usaCodigo" ColumnName="usaCodigo" />
+          <ScalarProperty Name="usaDescripcion" ColumnName="usaDescripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PosiblesClientes">
+      <EntityTypeMapping TypeName="NorthwindModel.PosiblesClientes">
+        <MappingFragment StoreEntitySet="PosiblesClientes">
+          <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+          <ScalarProperty Name="Primero_Nombre" ColumnName="Primero_Nombre" />
+          <ScalarProperty Name="Segundo_Nombre" ColumnName="Segundo_Nombre" />
+          <ScalarProperty Name="Primero_Apellido" ColumnName="Primero_Apellido" />
+          <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Dirreccion" ColumnName="Dirreccion" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prioridad">
+      <EntityTypeMapping TypeName="NorthwindModel.Prioridad">
+        <MappingFragment StoreEntitySet="Prioridad">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tarea">
+      <EntityTypeMapping TypeName="NorthwindModel.Tarea">
+        <MappingFragment StoreEntitySet="Tarea">
+          <ScalarProperty Name="tareaCodigo" ColumnName="tareaCodigo" />
+          <ScalarProperty Name="tareaTitular" ColumnName="tareaTitular" />
+          <ScalarProperty Name="tareaAsunto" ColumnName="tareaAsunto" />
+          <ScalarProperty Name="tareaFechaVencimiento" ColumnName="tareaFechaVencimiento" />
+          <ScalarProperty Name="tareaContacto" ColumnName="tareaContacto" />
+          <ScalarProperty Name="tareaCuenta" ColumnName="tareaCuenta" />
+          <ScalarProperty Name="estadoCodigo" ColumnName="estadoCodigo" />
+          <ScalarProperty Name="prioridaCodigo" ColumnName="prioridaCodigo" />
+          <ScalarProperty Name="tareaEnviarMensaje" ColumnName="tareaEnviarMensaje" />
+          <ScalarProperty Name="tareaRepetir" ColumnName="tareaRepetir" />
+          <ScalarProperty Name="tareaDescripcion" ColumnName="tareaDescripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="NorthwindModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="User" ColumnName="User" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="usaImagen" ColumnName="usaImagen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

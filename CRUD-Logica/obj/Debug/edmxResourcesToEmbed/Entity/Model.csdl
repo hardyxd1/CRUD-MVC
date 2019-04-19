@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="NorthwindModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="EstadoTareas">
+    <Key>
+      <PropertyRef Name="usaCodigo" />
+    </Key>
+    <Property Name="usaCodigo" Type="Int32" Nullable="false" />
+    <Property Name="usaDescripcion" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Tarea" Relationship="Self.FK_Tarea_EstadoTareas" FromRole="EstadoTareas" ToRole="Tarea" />
+  </EntityType>
+  <EntityType Name="PosiblesClientes">
+    <Key>
+      <PropertyRef Name="Identificacion" />
+    </Key>
+    <Property Name="Identificacion" Type="Int64" Nullable="false" />
+    <Property Name="Primero_Nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Segundo_Nombre" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Primero_Apellido" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Segundo_Apellido" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="Telefono" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="Dirreccion" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="Empresa" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Prioridad">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="1000" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Tarea" Relationship="Self.FK_Tarea_Prioridad" FromRole="Prioridad" ToRole="Tarea" />
+  </EntityType>
+  <EntityType Name="Tarea">
+    <Key>
+      <PropertyRef Name="tareaCodigo" />
+    </Key>
+    <Property Name="tareaCodigo" Type="Int32" Nullable="false" />
+    <Property Name="tareaTitular" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tareaAsunto" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tareaFechaVencimiento" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tareaContacto" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="tareaCuenta" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <Property Name="estadoCodigo" Type="Int32" Nullable="false" />
+    <Property Name="prioridaCodigo" Type="Int32" Nullable="false" />
+    <Property Name="tareaEnviarMensaje" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="tareaRepetir" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="tareaDescripcion" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EstadoTareas" Relationship="Self.FK_Tarea_EstadoTareas" FromRole="Tarea" ToRole="EstadoTareas" />
+    <NavigationProperty Name="Prioridad" Relationship="Self.FK_Tarea_Prioridad" FromRole="Tarea" ToRole="Prioridad" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="User" Type="String" MaxLength="100" FixedLength="true" Unicode="true" />
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="usaImagen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK_Tarea_EstadoTareas">
+    <End Role="EstadoTareas" Type="Self.EstadoTareas" Multiplicity="1" />
+    <End Role="Tarea" Type="Self.Tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadoTareas">
+        <PropertyRef Name="usaCodigo" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="estadoCodigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tarea_Prioridad">
+    <End Role="Prioridad" Type="Self.Prioridad" Multiplicity="1" />
+    <End Role="Tarea" Type="Self.Tarea" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Prioridad">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Tarea">
+        <PropertyRef Name="prioridaCodigo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="NorthwindEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="EstadoTareas" EntityType="Self.EstadoTareas" />
+    <EntitySet Name="PosiblesClientes" EntityType="Self.PosiblesClientes" />
+    <EntitySet Name="Prioridad" EntityType="Self.Prioridad" />
+    <EntitySet Name="Tarea" EntityType="Self.Tarea" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <AssociationSet Name="FK_Tarea_EstadoTareas" Association="Self.FK_Tarea_EstadoTareas">
+      <End Role="EstadoTareas" EntitySet="EstadoTareas" />
+      <End Role="Tarea" EntitySet="Tarea" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tarea_Prioridad" Association="Self.FK_Tarea_Prioridad">
+      <End Role="Prioridad" EntitySet="Prioridad" />
+      <End Role="Tarea" EntitySet="Tarea" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
